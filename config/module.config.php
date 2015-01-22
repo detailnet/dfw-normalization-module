@@ -26,6 +26,29 @@ return array(
         'shared' => array(
         ),
     ),
+    'jms_serializer' => array(
+        'naming_strategy' => 'identical',
+        'visitors' => array(
+            'serialization' => array(
+                'php' => 'jms_serializer.php_serialization_visitor',
+            ),
+            'deserialization' => array(
+                'php' => 'jms_serializer.php_deserialization_visitor',
+            ),
+        ),
+        'handlers' => array(
+            'subscribers' => array(
+                'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler',
+                'Detail\Normalization\JMSSerializer\Handler\DateHandler',
+                'Detail\Normalization\JMSSerializer\Handler\HalCollectionHandler',
+            ),
+        ),
+    ),
+    'zf-hal' => array(
+        'renderer' => array(
+            'default_hydrator' => 'Detail\Normalization\Hydrator\NormalizerBasedHydrator',
+        ),
+    ),
     'detail_normalization' => array(
         'normalizer' => 'Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer',
     ),

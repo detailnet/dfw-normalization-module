@@ -1,9 +1,11 @@
 <?php
 
-namespace Application\Core\JMSSerializer;
+namespace Detail\Normalization\Factory\JMSSerializer;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
+
+use Detail\Normalization\JMSSerializer\PhpDeserializationVistor;
 
 class PhpDeserializationVisitorFactory implements FactoryInterface
 {

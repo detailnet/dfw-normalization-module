@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Core\Normalizer;
+namespace Detail\Normalization\Factory\Normalizer;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
@@ -9,9 +9,9 @@ class JMSSerializerBasedNormalizerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /** @var \Application\Core\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber $doctrineProxySubscriber */
+        /** @var \Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber $doctrineProxySubscriber */
         $doctrineProxySubscriber = $serviceLocator->get(
-            'Application\Core\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber'
+            'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber'
         );
 
         /** @var \JMS\Serializer\EventDispatcher\EventDispatcher $eventDispatcher */

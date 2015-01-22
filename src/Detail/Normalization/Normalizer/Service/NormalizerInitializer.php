@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Core\Normalizer\Service;
+namespace Detail\Normalization\Normalizer\Service;
 
 use Zend\ServiceManager\InitializerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -23,9 +23,9 @@ class NormalizerInitializer implements
                 $serviceLocator = $serviceLocator->getServiceLocator();
             }
 
-            /** @var \Application\Core\Normalizer\JMSSerializerBasedNormalizer $normalizer */
+            /** @var \Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer $normalizer */
             $normalizer = $serviceLocator->get(
-                'Application\Core\Normalizer\JMSSerializerBasedNormalizer'
+                'Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer'
             );
 
             $instance->setNormalizer($normalizer);

@@ -30,7 +30,7 @@
         "sp/jms-serializer-module": "dev-master",
         "detailnet/dfw-core": "~0.1.1",
         "detailnet/dfw-log": "~0.1.1",
-        "detailnet/dfw-normalization": "~0.1.0"
+        "detailnet/dfw-normalization": "~0.1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.4.0",

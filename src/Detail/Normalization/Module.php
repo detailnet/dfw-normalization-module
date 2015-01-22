@@ -8,6 +8,7 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\Mvc\MvcEvent;
 
 class Module implements
     AutoloaderProviderInterface,
@@ -15,6 +16,27 @@ class Module implements
     ControllerProviderInterface,
     ServiceProviderInterface
 {
+    public function onBootstrap(MvcEvent $e)
+    {
+        /** @var \Zend\ServiceManager\ServiceManager $serviceManager */
+        $serviceManager = $e->getApplication()->getServiceManager();
+
+        // Register our own normalizer based hydrator with Apigility/Hal's plugin manager so that
+        // the default hydrator can be found.
+        if ($serviceManager->has('ZF\Hal\MetadataMap')) {
+            $hydratorClass = __NAMESPACE__ . '\ZendHydrator\NormalizerBasedHydrator';
+
+            /** @var \ZF\Hal\Metadata\MetadataMap $metadataMap */
+            $metadataMap = $serviceManager->get('ZF\Hal\MetadataMap');
+            $metadataMap->getHydratorManager()->setFactory(
+                $hydratorClass,
+                function() use ($serviceManager, $hydratorClass) {
+                    return $serviceManager->get($hydratorClass);
+                }
+            );
+        }
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -26,6 +26,7 @@
         "zendframework/zend-modulemanager": "2.*",
         "zendframework/zend-mvc": "2.*",
         "zendframework/zend-servicemanager": "2.*",
+        "zfcampus/zf-hal": "~1.0.4",
         "sp/jms-serializer-module": "dev-master",
         "detailnet/dfw-core": "~0.1.1",
         "detailnet/dfw-log": "~0.1.1",

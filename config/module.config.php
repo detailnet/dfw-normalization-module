@@ -18,7 +18,8 @@ return array(
             'Detail\Normalization\JMSSerializer\PhpSerializationVisitor'   => 'Detail\Normalization\Factory\JMSSerializer\PhpSerializationVisitorFactory',
             'Detail\Normalization\JMSSerializer\PhpDeserializationVisitor' => 'Detail\Normalization\Factory\JMSSerializer\PhpDeserializationVisitorFactory',
             'Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer' => 'Detail\Normalization\Factory\Normalizer\JMSSerializerBasedNormalizerFactory',
-            'Detail\Normalization\Hydrator\NormalizerBasedHydrator'        => 'Detail\Normalization\Factory\ZendHydrator\NormalizerBasedHydratorFactory',
+            'Detail\Normalization\Options\ModuleOptions'                   => 'Detail\Normalization\Factory\Options\ModuleOptionsFactory',
+            'Detail\Normalization\ZendHydrator\NormalizerBasedHydrator'    => 'Detail\Normalization\Factory\ZendHydrator\NormalizerBasedHydratorFactory',
         ),
         'initializers' => array(
             'Detail\Normalization\Normalizer\Service\NormalizerInitializer',
@@ -46,7 +47,7 @@ return array(
     ),
     'zf-hal' => array(
         'renderer' => array(
-            'default_hydrator' => 'Detail\Normalization\Hydrator\NormalizerBasedHydrator',
+            'default_hydrator' => 'Detail\Normalization\ZendHydrator\NormalizerBasedHydrator',
         ),
     ),
     'detail_normalization' => array(

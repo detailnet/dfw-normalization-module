@@ -5,6 +5,8 @@ namespace Detail\Normalization\Factory\ZendHydrator;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
 
+use Detail\Normalization\ZendHydrator\NormalizerBasedHydrator;
+
 class NormalizerBasedHydratorFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)

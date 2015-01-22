@@ -23,10 +23,11 @@ class NormalizerInitializer implements
                 $serviceLocator = $serviceLocator->getServiceLocator();
             }
 
-            /** @var \Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer $normalizer */
-            $normalizer = $serviceLocator->get(
-                'Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer'
-            );
+            /** @var \Detail\Normalization\Options\ModuleOptions $moduleOptions */
+            $moduleOptions = $serviceLocator->get('Detail\Normalization\Options\ModuleOptions');
+
+            /** @var \Detail\Normalization\Normalizer\NormalizerInterface $normalizer */
+            $normalizer = $serviceLocator->get( $moduleOptions->getNormalizer() );
 
             $instance->setNormalizer($normalizer);
         }

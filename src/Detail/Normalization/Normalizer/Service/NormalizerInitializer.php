@@ -27,7 +27,7 @@ class NormalizerInitializer implements
             $moduleOptions = $serviceLocator->get('Detail\Normalization\Options\ModuleOptions');
 
             /** @var \Detail\Normalization\Normalizer\NormalizerInterface $normalizer */
-            $normalizer = $serviceLocator->get( $moduleOptions->getNormalizer() );
+            $normalizer = $serviceLocator->get($moduleOptions->getNormalizer());
 
             $instance->setNormalizer($normalizer);
         }

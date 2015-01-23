@@ -16,8 +16,6 @@ class ModuleOptionsTest extends OptionsTestCase
             array(
                 'getNormalizer',
                 'setNormalizer',
-                'getJobBuilder',
-                'setJobBuilder',
             )
         );
     }

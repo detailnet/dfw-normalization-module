@@ -27,6 +27,11 @@ return array(
         'shared' => array(
         ),
     ),
+    'controllers' => array(
+        'initializers' => array(
+            'Detail\Normalization\Normalizer\Service\NormalizerInitializer',
+        ),
+    ),
     'jms_serializer' => array(
         'naming_strategy' => 'identical',
         'visitors' => array(

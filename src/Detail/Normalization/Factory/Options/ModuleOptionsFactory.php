@@ -19,7 +19,7 @@ class ModuleOptionsFactory implements FactoryInterface
         $config = $serviceLocator->get('Config');
 
         if (!isset($config['detail_normalization'])) {
-            throw new ConfigException('Config for Detail\FileConversion is not set');
+            throw new ConfigException('Config for Detail\Normalization is not set');
         }
 
         return new ModuleOptions($config['detail_normalization']);

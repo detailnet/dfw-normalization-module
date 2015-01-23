@@ -16,10 +16,10 @@ class Module implements
     ControllerProviderInterface,
     ServiceProviderInterface
 {
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(MvcEvent $event)
     {
         /** @var \Zend\ServiceManager\ServiceManager $serviceManager */
-        $serviceManager = $e->getApplication()->getServiceManager();
+        $serviceManager = $event->getApplication()->getServiceManager();
 
         // Register our own normalizer based hydrator with Apigility/Hal's plugin manager so that
         // the default hydrator can be found.

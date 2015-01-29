@@ -11,8 +11,9 @@ class PhpSerializationVisitorFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new PhpSerializationVisitor(
-            $serviceLocator->get('jms_serializer.naming_strategy')
-        );
+        /** @var \JMS\Serializer\Naming\PropertyNamingStrategyInterface $namingStrategy */
+        $namingStrategy = $serviceLocator->get('jms_serializer.naming_strategy');
+
+        return new PhpSerializationVisitor($namingStrategy);
     }
 }

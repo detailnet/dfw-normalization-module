@@ -44,6 +44,8 @@ return array(
             'subscribers' => array(
                 'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler',
                 'Detail\Normalization\JMSSerializer\Handler\DateHandler',
+                'Detail\Normalization\JMSSerializer\Handler\PassThroughHandler',
+                'Detail\Normalization\JMSSerializer\Handler\UuidHandler',
             ),
         ),
     ),

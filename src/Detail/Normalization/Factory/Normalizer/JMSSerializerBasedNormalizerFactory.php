@@ -11,18 +11,6 @@ class JMSSerializerBasedNormalizerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /** @var \Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber $doctrineProxySubscriber */
-        $doctrineProxySubscriber = $serviceLocator->get(
-            'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber'
-        );
-
-        /** @var \JMS\Serializer\EventDispatcher\EventDispatcher $eventDispatcher */
-        $eventDispatcher = $serviceLocator->get('jms_serializer.event_dispatcher');
-        $eventDispatcher->setListeners(array()); // Remove default listeners/subscribers
-
-        // Add our own version of the default subscriber to support HalCollection types
-        $eventDispatcher->addSubscriber($doctrineProxySubscriber);
-
         /** @var \JMS\Serializer\Serializer $serializer */
         $serializer = $serviceLocator->get('jms_serializer.serializer');
 

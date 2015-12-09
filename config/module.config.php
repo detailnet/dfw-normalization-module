@@ -12,6 +12,7 @@ return array(
             'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber' => 'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber',
             'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler'                     => 'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler',
             'Detail\Normalization\JMSSerializer\Handler\DateHandler'                                => 'Detail\Normalization\JMSSerializer\Handler\DateHandler',
+            'Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler'                       => 'Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler',
 
             // Add our own version of the default subscriber to support HalCollection types
             'jms_serializer.doctrine_proxy_subscriber' => 'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber',
@@ -47,6 +48,7 @@ return array(
             'subscribers' => array(
                 'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler',
                 'Detail\Normalization\JMSSerializer\Handler\DateHandler',
+                'Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler',
                 'Detail\Normalization\JMSSerializer\Handler\PassThroughHandler',
                 'Detail\Normalization\JMSSerializer\Handler\UuidHandler',
             ),

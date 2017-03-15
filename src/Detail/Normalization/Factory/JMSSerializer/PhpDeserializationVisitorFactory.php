@@ -2,17 +2,28 @@
 
 namespace Detail\Normalization\Factory\JMSSerializer;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Interop\Container\ContainerInterface;
+
+use Zend\ServiceManager\Factory\FactoryInterface;
+
+use JMS\Serializer\Naming\PropertyNamingStrategyInterface;
 
 use Detail\Normalization\JMSSerializer\PhpDeserializationVisitor;
 
 class PhpDeserializationVisitorFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    /**
+     * Create PhpDeserializationVisitor
+     *
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return PhpDeserializationVisitor
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \JMS\Serializer\Naming\PropertyNamingStrategyInterface $namingStrategy */
-        $namingStrategy = $serviceLocator->get('jms_serializer.naming_strategy');
+        /** @var PropertyNamingStrategyInterface $namingStrategy */
+        $namingStrategy = $container->get('jms_serializer.naming_strategy');
 
         return new PhpDeserializationVisitor($namingStrategy);
     }

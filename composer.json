@@ -1,6 +1,6 @@
 {
     "name": "detailnet/dfw-normalization-module",
-    "description": "Zend Framework 2 Module for dfw-normalization",
+    "description": "Zend Framework Module for dfw-normalization",
     "type": "library",
     "keywords": [
         "dfw",
@@ -9,7 +9,7 @@
         "serialization",
         "hydration",
         "module",
-        "zf2"
+        "zf"
     ],
     "homepage": "https://github.com/detailnet/dfw-normalization-module/",
     "license": "MIT",
@@ -20,21 +20,19 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "psr/log": "~1.0",
-        "zendframework/zend-loader": "2.*",
-        "zendframework/zend-modulemanager": "2.*",
-        "zendframework/zend-mvc": "2.*",
-        "zendframework/zend-servicemanager": "2.*",
-        "sp/jms-serializer-module": "dev-master",
-        "detailnet/dfw-core": "~0.2",
-        "detailnet/dfw-normalization": "~0.2.0"
+        "php": "^7.0",
+        "zendframework/zend-loader": "^2.5.1",
+        "zendframework/zend-modulemanager": "^2.7.2",
+        "zendframework/zend-mvc": "^2.7.10 || ^3.0.1",
+        "zendframework/zend-servicemanager": "^2.7.8 || ^3.1",
+        "detailnet/dfw-core": "^0.3.0",
+        "detailnet/dfw-normalization": "^0.2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.4.5",
-        "squizlabs/php_codesniffer" : "~2.2.0",
-        "phpmd/phpmd": "~2.1.3",
-        "satooshi/php-coveralls": "dev-master"
+        "phpunit/phpunit": "^6.0",
+        "squizlabs/php_codesniffer" : "^2.2",
+        "phpmd/phpmd": "^2.1.3",
+        "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
         "psr-0": {

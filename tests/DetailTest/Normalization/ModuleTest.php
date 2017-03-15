@@ -2,9 +2,12 @@
 
 namespace DetailTest\Normalization;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
+
+use Zend\Loader\StandardAutoloader;
 
 use Detail\Normalization\Module;
+use Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer;
 
 class ModuleTest extends TestCase
 {
@@ -24,9 +27,11 @@ class ModuleTest extends TestCase
 
         $this->assertTrue(is_array($config));
 
-        $this->assertArrayHasKey('Zend\Loader\StandardAutoloader', $config);
-        $this->assertArrayHasKey('namespaces', $config['Zend\Loader\StandardAutoloader']);
-        $this->assertArrayHasKey('Detail\Normalization', $config['Zend\Loader\StandardAutoloader']['namespaces']);
+        $autoloaderClass = StandardAutoloader::CLASS;
+
+        $this->assertArrayHasKey($autoloaderClass, $config);
+        $this->assertArrayHasKey('namespaces', $config[$autoloaderClass]);
+        $this->assertArrayHasKey('Detail\Normalization', $config[$autoloaderClass]['namespaces']);
     }
 
     public function testModuleProvidesConfig()
@@ -38,7 +43,7 @@ class ModuleTest extends TestCase
         $this->assertTrue(is_array($config['detail_normalization']));
         $this->assertArrayHasKey('normalizer', $config['detail_normalization']);
         $this->assertEquals(
-            'Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer',
+            JMSSerializerBasedNormalizer::CLASS,
             $config['detail_normalization']['normalizer']
         );
     }

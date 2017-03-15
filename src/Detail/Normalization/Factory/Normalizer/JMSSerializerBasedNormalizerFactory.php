@@ -2,17 +2,29 @@
 
 namespace Detail\Normalization\Factory\Normalizer;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Interop\Container\ContainerInterface;
+
+use Zend\ServiceManager\Factory\FactoryInterface;
+
+use JMS\Serializer\Serializer as JMSSerializer;
 
 use Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer;
 
-class JMSSerializerBasedNormalizerFactory implements FactoryInterface
+class JMSSerializerBasedNormalizerFactory implements
+    FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    /**
+     * Create JMSSerializerBasedNormalizer
+     *
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return JMSSerializerBasedNormalizer
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /** @var \JMS\Serializer\Serializer $serializer */
-        $serializer = $serviceLocator->get('jms_serializer.serializer');
+        /** @var JMSSerializer $serializer */
+        $serializer = $container->get('jms_serializer.serializer');
 
         return new JMSSerializerBasedNormalizer($serializer);
     }

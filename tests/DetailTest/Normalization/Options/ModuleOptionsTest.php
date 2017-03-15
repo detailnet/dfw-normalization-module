@@ -2,17 +2,19 @@
 
 namespace DetailTest\Normalization\Options;
 
+use Detail\Normalization\Options\ModuleOptions;
+
 class ModuleOptionsTest extends OptionsTestCase
 {
     /**
-     * @var \Detail\Normalization\Options\ModuleOptions
+     * @var ModuleOptions
      */
     protected $options;
 
     protected function setUp()
     {
         $this->options = $this->getOptions(
-            'Detail\Normalization\Options\ModuleOptions',
+            ModuleOptions::CLASS,
             array(
                 'getNormalizer',
                 'setNormalizer',

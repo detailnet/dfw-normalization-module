@@ -37,11 +37,17 @@ class Module implements
         return include __DIR__ . '/../../../config/module.config.php';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getControllerConfig()
     {
         return array();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getServiceConfig()
     {
         return array();

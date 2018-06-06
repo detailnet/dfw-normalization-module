@@ -14,8 +14,6 @@ class JMSSerializerBasedNormalizerFactory implements
     FactoryInterface
 {
     /**
-     * Create JMSSerializerBasedNormalizer
-     *
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options

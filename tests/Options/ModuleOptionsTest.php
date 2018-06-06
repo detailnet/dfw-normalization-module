@@ -9,7 +9,7 @@ class ModuleOptionsTest extends OptionsTestCase
     /**
      * @var ModuleOptions
      */
-    protected $options;
+    private $options;
 
     protected function setUp()
     {
@@ -22,7 +22,7 @@ class ModuleOptionsTest extends OptionsTestCase
         );
     }
 
-    public function testNormalizerCanBeSet()
+    public function testNormalizerCanBeSet(): void
     {
         $normalizer = 'Some\Normalizer\Class';
 

@@ -19,7 +19,7 @@ class ModuleTest extends TestCase
         $this->module = new Module();
     }
 
-    public function testModuleProvidesConfig()
+    public function testModuleProvidesConfig(): void
     {
         $config = $this->module->getConfig();
 

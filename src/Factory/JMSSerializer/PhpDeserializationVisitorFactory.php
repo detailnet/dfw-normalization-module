@@ -10,11 +10,10 @@ use JMS\Serializer\Naming\PropertyNamingStrategyInterface;
 
 use Detail\Normalization\JMSSerializer\PhpDeserializationVisitor;
 
-class PhpDeserializationVisitorFactory implements FactoryInterface
+class PhpDeserializationVisitorFactory implements
+    FactoryInterface
 {
     /**
-     * Create PhpDeserializationVisitor
-     *
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options

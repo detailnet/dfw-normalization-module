@@ -7,28 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 abstract class OptionsTestCase extends TestCase
 {
-    /**
-     * @param string $class
-     * @param array $methods
-     * @return MockObject
-     */
-    protected function getOptions($class, array $methods)
+    protected function getOptions(string $class, array $methods): MockObject
     {
         $mockedMethods = array_diff($this->getMethods($class), $methods);
 
         return $this->getMockBuilder($class)->setMethods($mockedMethods)->getMock();
     }
 
-    /**
-     * Helper to get all public and abstract methods of a class.
-     *
-     * This includes methods of parent classes.
-     *
-     * @param string $class
-     * @param boolean $autoload
-     * @return array
-     */
-    protected function getMethods($class, $autoload = true)
+    private function getMethods(string $class, bool $autoload = true): array
     {
         $methods = [];
 

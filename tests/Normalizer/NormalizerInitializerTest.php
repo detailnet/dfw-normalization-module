@@ -33,6 +33,9 @@ class NormalizerInitializerTest extends TestCase
 
         $initializer = new NormalizerInitializer();
         $initializer($services, $object);
+
+        // Need an assertion (otherwise the test is flagged "risky" and the coverage report will not contain it)
+        $this->assertTrue(true);
     }
 
     public function testInjectsNormalizerIfObjectSupportsNormalizer(): void
@@ -59,7 +62,6 @@ class NormalizerInitializerTest extends TestCase
         /** @var ServiceLocatorInterface $services */
 
         $object = $this->getMockBuilder(NormalizerAwareInterface::CLASS)
-//            ->setMethods(['setNormalizer'])
             ->getMock();
         $object->expects($this->once())
             ->method('setNormalizer')
@@ -69,7 +71,7 @@ class NormalizerInitializerTest extends TestCase
         $initializer($services, $object);
     }
 
-    protected function getServices(): MockObject
+    private function getServices(): MockObject
     {
         return $this->services;
     }

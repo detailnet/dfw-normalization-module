@@ -2,6 +2,7 @@
 
 namespace DetailTest\Normalization\Options;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 abstract class OptionsTestCase extends TestCase
@@ -9,7 +10,7 @@ abstract class OptionsTestCase extends TestCase
     /**
      * @param string $class
      * @param array $methods
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return MockObject
      */
     protected function getOptions($class, array $methods)
     {

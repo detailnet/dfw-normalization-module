@@ -35,18 +35,13 @@
         "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Detail\\Normalization\\": "src/"
         }
     },
     "autoload-dev": {
-        "psr-0": {
+        "psr-4": {
             "DetailTest\\Normalization\\": "tests/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.x-dev"
         }
     },
     "archive": {

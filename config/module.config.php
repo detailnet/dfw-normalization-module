@@ -24,7 +24,7 @@ return array(
             'Detail\Normalization\Options\ModuleOptions'                   => 'Detail\Normalization\Factory\Options\ModuleOptionsFactory',
         ),
         'initializers' => array(
-            'Detail\Normalization\Normalizer\Service\NormalizerInitializer',
+            'Detail\Normalization\Normalizer\NormalizerInitializer',
         ),
         'shared' => array(
         ),

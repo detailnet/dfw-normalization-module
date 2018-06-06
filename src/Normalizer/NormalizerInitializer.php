@@ -1,12 +1,11 @@
 <?php
 
-namespace Detail\Normalization\Normalizer\Service;
+namespace Detail\Normalization\Normalizer;
 
 use Interop\Container\ContainerInterface;
 
 use Zend\ServiceManager\Initializer\InitializerInterface;
 
-use Detail\Normalization\Normalizer\NormalizerInterface;
 use Detail\Normalization\Options\ModuleOptions;
 
 class NormalizerInitializer implements

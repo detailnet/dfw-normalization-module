@@ -11,7 +11,7 @@
     syntaxCheck="true"
 >
     <testsuite name="Detail\Normalization Test Suite">
-        <directory>./tests/DetailTest/Normalization</directory>
+        <directory>./tests</directory>
     </testsuite>
 
     <filter>

@@ -1,4 +1,4 @@
-# Zend Framework 2 Module for dfw-normalization
+# Zend Framework Module for dfw-normalization
 
 [![Build Status](https://travis-ci.org/detailnet/dfw-normalization-module.svg?branch=master)](https://travis-ci.org/detailnet/dfw-normalization-module)
 [![Coverage Status](https://img.shields.io/coveralls/detailnet/dfw-normalization-module.svg)](https://coveralls.io/r/detailnet/dfw-normalization-module)
@@ -6,10 +6,10 @@
 [![Latest Unstable Version](https://poser.pugx.org/detailnet/dfw-normalization-module/v/unstable.svg)](https://packagist.org/packages/detailnet/dfw-normalization-module)
 
 ## Introduction
-This module integrates the [DETAIL Framework library for array/object (de-)normalization](https://github.com/detailnet/dfw-normalization) with [Zend Framework 2](https://github.com/zendframework/zf2).
+This module integrates the [DETAIL Framework library for array/object (de-)normalization](https://github.com/detailnet/dfw-normalization) with [Zend Framework](https://github.com/zendframework/zendframework).
 
 ## Requirements
-[Zend Framework 2 Skeleton Application](http://www.github.com/zendframework/ZendSkeletonApplication) (or compatible architecture)
+[Zend Framework Skeleton Application](http://www.github.com/zendframework/ZendSkeletonApplication) (or compatible architecture)
 
 ## Installation
 Install the module through [Composer](http://getcomposer.org/) using the following steps:
@@ -21,7 +21,7 @@ Install the module through [Composer](http://getcomposer.org/) using the followi
      ```json
      {
          "require": {
-             "detailnet/dfw-normalization-module": "1.x-dev"
+             "detailnet/dfw-normalization-module": "^1.0"
          }
      }
      ```

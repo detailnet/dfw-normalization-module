@@ -49,11 +49,11 @@
             "@test"
         ],
         "cs-check": "phpcs --standard=phpcs.xml -v",
-        "cs-check-report": "phpcs --standard=phpcs.xml --report=checkstyle --report-file=build/logs/checkstyle.xml",
+        "cs-check-report": "phpcs --standard=phpcs.xml --report=checkstyle --report-file=build/checkstyle.xml",
         "md-check": "phpmd src xml phpmd.xml",
-        "md-check-report": "phpmd src xml phpmd.xml --reportfile build/logs/pmd.xml",
+        "md-check-report": "phpmd src xml phpmd.xml --reportfile build/pmd.xml",
         "test": "phpunit",
         "test-coverage-html": "phpunit --coverage-html build/coverage",
-        "test-coverage-clover": "phpunit --coverage-clover build/logs/clover.xml"
+        "test-coverage-clover": "phpunit --coverage-clover build/clover.xml"
     }
 }

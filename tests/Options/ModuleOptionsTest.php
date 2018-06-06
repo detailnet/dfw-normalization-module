@@ -15,10 +15,10 @@ class ModuleOptionsTest extends OptionsTestCase
     {
         $this->options = $this->getOptions(
             ModuleOptions::CLASS,
-            array(
+            [
                 'getNormalizer',
                 'setNormalizer',
-            )
+            ]
         );
     }
 

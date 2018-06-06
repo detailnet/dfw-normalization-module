@@ -1,60 +1,59 @@
 <?php
 
-return array(
-    'service_manager' => array(
-        'abstract_factories' => array(
-        ),
-        'aliases' => array(
-            'jms_serializer.php_serialization_visitor'   => 'Detail\Normalization\JMSSerializer\PhpSerializationVisitor',
-            'jms_serializer.php_deserialization_visitor' => 'Detail\Normalization\JMSSerializer\PhpDeserializationVisitor',
-        ),
-        'invokables' => array(
-            'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber' => 'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber',
-            'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler'                     => 'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler',
-            'Detail\Normalization\JMSSerializer\Handler\DateHandler'                                => 'Detail\Normalization\JMSSerializer\Handler\DateHandler',
-            'Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler'                       => 'Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler',
+return [
+    'service_manager' => [
+        'abstract_factories' => [
+        ],
+        'aliases' => [
+            'jms_serializer.php_serialization_visitor' => Detail\Normalization\JMSSerializer\PhpSerializationVisitor::CLASS,
+            'jms_serializer.php_deserialization_visitor' => Detail\Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS,
+        ],
+        'invokables' => [
+            Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS => Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS,
+            Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS => Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS,
+            Detail\Normalization\JMSSerializer\Handler\DateHandler::CLASS => Detail\Normalization\JMSSerializer\Handler\DateHandler::CLASS,
+            Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler::CLASS => Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler::CLASS,
 
             // Add our own version of the default subscriber to support HalCollection types
-            'jms_serializer.doctrine_proxy_subscriber' => 'Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber',
-        ),
-        'factories' => array(
-            'Detail\Normalization\JMSSerializer\PhpSerializationVisitor'   => 'Detail\Normalization\Factory\JMSSerializer\PhpSerializationVisitorFactory',
-            'Detail\Normalization\JMSSerializer\PhpDeserializationVisitor' => 'Detail\Normalization\Factory\JMSSerializer\PhpDeserializationVisitorFactory',
-            'Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer' => 'Detail\Normalization\Factory\Normalizer\JMSSerializerBasedNormalizerFactory',
-            'Detail\Normalization\Options\ModuleOptions'                   => 'Detail\Normalization\Factory\Options\ModuleOptionsFactory',
-        ),
-        'initializers' => array(
-            'Detail\Normalization\Normalizer\NormalizerInitializer',
-        ),
-        'shared' => array(
-        ),
-    ),
-    'controllers' => array(
-        'initializers' => array(
-            'Detail\Normalization\Normalizer\Service\NormalizerInitializer',
-        ),
-    ),
-    'jms_serializer' => array(
+            'jms_serializer.doctrine_proxy_subscriber' => Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS,
+        ],
+        'factories' => [
+            Detail\Normalization\JMSSerializer\PhpSerializationVisitor::CLASS => Detail\Normalization\Factory\JMSSerializer\PhpSerializationVisitorFactory::CLASS,
+            Detail\Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS => Detail\Normalization\Factory\JMSSerializer\PhpDeserializationVisitorFactory::CLASS,
+            Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer::CLASS => Detail\Normalization\Factory\Normalizer\JMSSerializerBasedNormalizerFactory::CLASS,
+            Detail\Normalization\Options\ModuleOptions::CLASS => Detail\Normalization\Factory\Options\ModuleOptionsFactory::CLASS,
+        ],
+        'initializers' => [
+            Detail\Normalization\Normalizer\NormalizerInitializer::CLASS,
+        ],
+        'shared' => [
+        ],
+    ],
+    'controllers' => [
+        'initializers' => [
+            Detail\Normalization\Normalizer\NormalizerInitializer::CLASS,
+        ],
+    ],
+    'jms_serializer' => [
         'naming_strategy' => 'identical',
-        'visitors' => array(
-            'serialization' => array(
+        'visitors' => [
+            'serialization' => [
                 'php' => 'jms_serializer.php_serialization_visitor',
-            ),
-            'deserialization' => array(
+            ],
+            'deserialization' => [
                 'php' => 'jms_serializer.php_deserialization_visitor',
-            ),
-        ),
-        'handlers' => array(
-            'subscribers' => array(
-                'Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler',
-                'Detail\Normalization\JMSSerializer\Handler\DateHandler',
-                'Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler',
-                'Detail\Normalization\JMSSerializer\Handler\PassThroughHandler',
-                'Detail\Normalization\JMSSerializer\Handler\UuidHandler',
-            ),
-        ),
-    ),
-    'detail_normalization' => array(
-        'normalizer' => 'Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer',
-    ),
-);
+            ],
+        ],
+        'handlers' => [
+            'subscribers' => [
+                Detail\Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS,
+                Detail\Normalization\JMSSerializer\Handler\DateHandler::CLASS,
+                Detail\Normalization\JMSSerializer\Handler\DateImmutableHandler::CLASS,
+                Detail\Normalization\JMSSerializer\Handler\UuidHandler::CLASS,
+            ],
+        ],
+    ],
+    'detail_normalization' => [
+        'normalizer' => Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer::CLASS,
+    ],
+];

@@ -1,6 +1,5 @@
 <?php
 
 return array(
-    'detail_normalization' => array(
-    ),
+    'detail_normalization' => [],
 );

@@ -16,7 +16,7 @@ abstract class FactoryTestCase extends TestCase
 
     protected function setUp()
     {
-        $this->services = $this->getMockBuilder(ServiceLocatorInterface::class)->getMock();
+        $this->services = $this->getMockBuilder(ServiceLocatorInterface::CLASS)->getMock();
     }
 
     protected function getServices(): MockObject

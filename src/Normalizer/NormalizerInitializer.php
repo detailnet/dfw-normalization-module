@@ -12,22 +12,22 @@ class NormalizerInitializer implements
     InitializerInterface
 {
     /**
-     * Initialize the given instance
-     *
      * @param ContainerInterface $container
      * @param object $instance
      * @return void
      */
     public function __invoke(ContainerInterface $container, $instance)
     {
-        if ($instance instanceof NormalizerAwareInterface) {
-            /** @var ModuleOptions $moduleOptions */
-            $moduleOptions = $container->get(ModuleOptions::CLASS);
-
-            /** @var NormalizerInterface $normalizer */
-            $normalizer = $container->get($moduleOptions->getNormalizer());
-
-            $instance->setNormalizer($normalizer);
+        if (!$instance instanceof NormalizerAwareInterface) {
+            return;
         }
+
+        /** @var ModuleOptions $moduleOptions */
+        $moduleOptions = $container->get(ModuleOptions::CLASS);
+
+        /** @var NormalizerInterface $normalizer */
+        $normalizer = $container->get($moduleOptions->getNormalizer());
+
+        $instance->setNormalizer($normalizer);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Detail\Normalization\Options;
 
-use Detail\Core\Options\AbstractOptions;
+use Zend\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions
 {

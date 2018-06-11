@@ -9,6 +9,8 @@ return [
                 Detail\Normalization\JMSSerializer\PhpSerializationVisitor::CLASS,
             'jms_serializer.php_deserialization_visitor' =>
                 Detail\Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS,
+            'jms_serializer.serializer' =>
+                JMS\Serializer\Serializer::CLASS,
         ],
         'invokables' => [
             Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS =>
@@ -25,6 +27,9 @@ return [
                 Detail\Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS,
         ],
         'factories' => [
+            // JMSSerializer
+            JMS\Serializer\Serializer::CLASS => Detail\Normalization\Factory\JMSSerializer\SerializerFactory::CLASS,
+            // Normalizer
             Detail\Normalization\JMSSerializer\PhpSerializationVisitor::CLASS =>
                 Detail\Normalization\Factory\JMSSerializer\PhpSerializationVisitorFactory::CLASS,
             Detail\Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS =>

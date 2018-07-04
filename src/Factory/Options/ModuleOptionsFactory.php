@@ -9,7 +9,8 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 
 use Detail\Normalization\Options\ModuleOptions;
 
-class ModuleOptionsFactory implements FactoryInterface
+class ModuleOptionsFactory implements
+    FactoryInterface
 {
     const OPTION = 'detail_normalization';
 

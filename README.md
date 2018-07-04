@@ -21,7 +21,7 @@ Install the module through [Composer](http://getcomposer.org/) using the followi
      ```json
      {
          "require": {
-             "detailnet/dfw-normalization-module": "^1.0"
+             "detailnet/dfw-normalization-module": "^1.1"
          }
      }
      ```

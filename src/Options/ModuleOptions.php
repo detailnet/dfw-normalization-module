@@ -9,7 +9,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $normalizer;
+    private $normalizer;
 
     /**
      * @return string

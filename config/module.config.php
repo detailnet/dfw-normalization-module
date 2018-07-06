@@ -7,8 +7,12 @@ return [
     'service_manager' => [
         'aliases' => [
             'jms_serializer.naming_strategy.identical' => JMS\Serializer\Naming\IdenticalPropertyNamingStrategy::CLASS,
+            'jms_serializer.json_serialization_visitor' => JMS\Serializer\JsonSerializationVisitor::CLASS,
+            'jms_serializer.json_deserialization_visitor' => JMS\Serializer\JsonDeserializationVisitor::CLASS,
             'jms_serializer.php_serialization_visitor' => Normalization\JMSSerializer\PhpSerializationVisitor::CLASS,
             'jms_serializer.php_deserialization_visitor' => Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS,
+            'jms_serializer.xml_serialization_visitor' => JMS\Serializer\XmlSerializationVisitor::CLASS,
+            'jms_serializer.xml_deserialization_visitor' => JMS\Serializer\XmlDeserializationVisitor::CLASS,
             'jms_serializer.serializer' => JMS\Serializer\Serializer::CLASS,
         ],
         'invokables' => [
@@ -33,14 +37,22 @@ return [
         ],
         'factories' => [
             // JMSSerializer
+            Normalization\Options\JMSSerializerOptions::CLASS => Factory\Options\JMSSerializerOptionsFactory::CLASS,
+            JMS\Serializer\JsonSerializationVisitor::CLASS =>
+                Factory\JMSSerializer\JsonSerializationVisitorFactory::CLASS,
+            JMS\Serializer\JsonDeserializationVisitor::CLASS =>
+                Factory\JMSSerializer\JsonDeserializationVisitorFactory::CLASS,
+            JMS\Serializer\Serializer::CLASS => Factory\JMSSerializer\SerializerFactory::CLASS,
+            JMS\Serializer\XmlSerializationVisitor::CLASS =>
+                Factory\JMSSerializer\XmlSerializationVisitorFactory::CLASS,
+            JMS\Serializer\XmlDeserializationVisitor::CLASS =>
+                Factory\JMSSerializer\XmlDeserializationVisitorFactory::CLASS,
+            'jms_serializer.naming_strategy' => Factory\JMSSerializer\NamingStrategyFactory::CLASS,
+            // Normalizer
             Normalization\JMSSerializer\PhpSerializationVisitor::CLASS =>
                 Factory\JMSSerializer\PhpSerializationVisitorFactory::CLASS,
             Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS =>
                 Factory\JMSSerializer\PhpDeserializationVisitorFactory::CLASS,
-            Normalization\Options\JMSSerializerOptions::CLASS => Factory\Options\JMSSerializerOptionsFactory::CLASS,
-            JMS\Serializer\Serializer::CLASS => Factory\JMSSerializer\SerializerFactory::CLASS,
-            'jms_serializer.naming_strategy' => Factory\JMSSerializer\NamingStrategyFactory::CLASS,
-            // Normalizer
             Normalization\Normalizer\JMSSerializerBasedNormalizer::CLASS =>
                 Factory\Normalizer\JMSSerializerBasedNormalizerFactory::CLASS,
             Normalization\Options\ModuleOptions::CLASS => Factory\Options\ModuleOptionsFactory::CLASS,
@@ -59,10 +71,14 @@ return [
         'naming_strategy' => 'identical',
         'visitors' => [
             'serialization' => [
+                'json' => 'jms_serializer.json_serialization_visitor',
                 'php' => 'jms_serializer.php_serialization_visitor',
+                'xml' => 'jms_serializer.xml_serialization_visitor',
             ],
             'deserialization' => [
+                'json' => 'jms_serializer.json_deserialization_visitor',
                 'php' => 'jms_serializer.php_deserialization_visitor',
+                'xml' => 'jms_serializer.xml_deserialization_visitor',
             ],
         ],
         'handlers' => [

@@ -12,7 +12,7 @@ class MetadataOptions extends AbstractOptions
     private $fileCache;
 
     /**
-     * @var array
+     * @var MetadataDirectoryOptions[]
      */
     private $directories = [];
 
@@ -30,6 +30,9 @@ class MetadataOptions extends AbstractOptions
         $this->fileCache = $fileCache;
     }
 
+    /**
+     * @return MetadataDirectoryOptions[]
+     */
     public function getDirectories(): array
     {
         return $this->directories;
@@ -37,6 +40,16 @@ class MetadataOptions extends AbstractOptions
 
     public function setDirectories(array $directories): void
     {
-        $this->directories = $directories;
+        $dirs = [];
+
+        foreach ($directories as $directory) {
+            if (is_array($directory)) {
+                $directory = new MetadataDirectoryOptions($directory);
+            }
+
+            $dirs[] = $directory;
+        }
+
+        $this->directories = $dirs;
     }
 }

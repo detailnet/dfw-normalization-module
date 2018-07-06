@@ -5,17 +5,17 @@ use Detail\Normalization\Factory;
 
 return [
     'service_manager' => [
-        'abstract_factories' => [
-        ],
         'aliases' => [
-            'jms_serializer.php_serialization_visitor' =>
-                Normalization\JMSSerializer\PhpSerializationVisitor::CLASS,
-            'jms_serializer.php_deserialization_visitor' =>
-                Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS,
-            'jms_serializer.serializer' =>
-                JMS\Serializer\Serializer::CLASS,
+            'jms_serializer.naming_strategy.identical' => JMS\Serializer\Naming\IdenticalPropertyNamingStrategy::CLASS,
+            'jms_serializer.php_serialization_visitor' => Normalization\JMSSerializer\PhpSerializationVisitor::CLASS,
+            'jms_serializer.php_deserialization_visitor' => Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS,
+            'jms_serializer.serializer' => JMS\Serializer\Serializer::CLASS,
         ],
         'invokables' => [
+            // JMSSerializer
+            JMS\Serializer\Naming\IdenticalPropertyNamingStrategy::CLASS =>
+                JMS\Serializer\Naming\IdenticalPropertyNamingStrategy::CLASS,
+            // Normalizer
             Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS =>
                 Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS,
             Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS =>
@@ -33,23 +33,20 @@ return [
         ],
         'factories' => [
             // JMSSerializer
-            Normalization\Options\JMSSerializerOptions::CLASS =>
-                Factory\Options\JMSSerializerOptionsFactory::CLASS,
-            JMS\Serializer\Serializer::CLASS => Factory\JMSSerializer\SerializerFactory::CLASS,
-            // Normalizer
             Normalization\JMSSerializer\PhpSerializationVisitor::CLASS =>
                 Factory\JMSSerializer\PhpSerializationVisitorFactory::CLASS,
             Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS =>
                 Factory\JMSSerializer\PhpDeserializationVisitorFactory::CLASS,
+            Normalization\Options\JMSSerializerOptions::CLASS => Factory\Options\JMSSerializerOptionsFactory::CLASS,
+            JMS\Serializer\Serializer::CLASS => Factory\JMSSerializer\SerializerFactory::CLASS,
+            'jms_serializer.naming_strategy' => Factory\JMSSerializer\NamingStrategyFactory::CLASS,
+            // Normalizer
             Normalization\Normalizer\JMSSerializerBasedNormalizer::CLASS =>
                 Factory\Normalizer\JMSSerializerBasedNormalizerFactory::CLASS,
-            Normalization\Options\ModuleOptions::CLASS =>
-                Factory\Options\ModuleOptionsFactory::CLASS,
+            Normalization\Options\ModuleOptions::CLASS => Factory\Options\ModuleOptionsFactory::CLASS,
         ],
         'initializers' => [
             Normalization\Normalizer\NormalizerInitializer::CLASS,
-        ],
-        'shared' => [
         ],
     ],
     'controllers' => [

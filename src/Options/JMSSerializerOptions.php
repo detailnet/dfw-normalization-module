@@ -17,7 +17,7 @@ class JMSSerializerOptions extends AbstractOptions
     private $namingStrategy;
 
     /**
-     * @var array
+     * @var array|JMSSerializer\VisitorsOptions
      */
     private $visitors = [];
 
@@ -56,8 +56,12 @@ class JMSSerializerOptions extends AbstractOptions
         $this->namingStrategy = $namingStrategy;
     }
 
-    public function getVisitors(): array
+    public function getVisitors(): JMSSerializer\VisitorsOptions
     {
+        if (is_array($this->visitors)) {
+            $this->visitors = new JMSSerializer\VisitorsOptions($this->visitors);
+        }
+
         return $this->visitors;
     }
 

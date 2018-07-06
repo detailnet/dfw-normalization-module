@@ -10,6 +10,7 @@ use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\VisitorInterface;
 
 use Detail\Normalization\Options\JMSSerializerOptions;
 
@@ -24,17 +25,11 @@ class SerializerFactory implements
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-//        /** @var PropertyNamingStrategyInterface $namingStrategy */
-//        $namingStrategy = $container->get('jms_serializer.naming_strategy');
-
         /** @var JMSSerializerOptions $serializerOptions */
         $serializerOptions = $container->get(JMSSerializerOptions::CLASS);
 
-//        $serializerOptions->getNamingStrategy();
-
         $serializer = SerializerBuilder::create();
-        $serializer->setDebug((bool) $serializerOptions->getDebug())
-            ->addDefaultHandlers();
+        $serializer->setDebug((bool) $serializerOptions->getDebug());
 
         $serializer->configureHandlers(
             function (HandlerRegistry $handlers) use ($serializerOptions, $container) {
@@ -46,6 +41,27 @@ class SerializerFactory implements
                 }
             }
         );
+
+        foreach ($serializerOptions->getVisitors()->getSerialization() as $format => $visitorName) {
+            /** @var VisitorInterface $visitor */
+            $visitor = $container->get($visitorName);
+
+            $serializer->setSerializationVisitor($format, $visitor);
+        }
+
+        foreach ($serializerOptions->getVisitors()->getDeserialization() as $format => $visitorName) {
+            /** @var VisitorInterface $visitor */
+            $visitor = $container->get($visitorName);
+
+            $serializer->setDeserializationVisitor($format, $visitor);
+        }
+
+        foreach ($serializerOptions->getMetadata()->getDirectories() as $directory) {
+            $serializer->addMetadataDir(
+                rtrim($directory->getPath(), '\\/'),
+                $directory->getNamespacePrefix() ? rtrim($directory->getNamespacePrefix(), '\\') : ''
+            );
+        }
 
         $cacheDir = $serializerOptions->getMetadata()->getFileCache()->getDir();
 

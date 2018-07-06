@@ -2,35 +2,62 @@
 
 namespace DetailTest\Normalization\Factory\JMSSerializer;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
+use JMS\Serializer\Naming\PropertyNamingStrategyInterface;
 use JMS\Serializer\Serializer;
 
 use Detail\Normalization\Factory\JMSSerializer\SerializerFactory;
+use Detail\Normalization\Options\JMSSerializer\EventDispatcherOptions;
+use Detail\Normalization\Options\JMSSerializer\FileCacheOptions;
+use Detail\Normalization\Options\JMSSerializer\HandlersOptions;
+use Detail\Normalization\Options\JMSSerializer\MetadataOptions;
+use Detail\Normalization\Options\JMSSerializer\VisitorsOptions;
 use Detail\Normalization\Options\JMSSerializerOptions;
 
 use DetailTest\Normalization\Factory\FactoryTestCase;
 
 class SerializerFactoryTest extends FactoryTestCase
 {
-    public function testCreatesVisitor(): void
+    public function testCreatesSerializerWithDefaultOptions(): void
     {
-        $jmsSerializerOptions = $this->getMockBuilder(JMSSerializerOptions::CLASS)->getMock();
-        $jmsSerializerOptions->expects($this->any())
-            ->method('getNamingStrategy')
-            ->will($this->returnValue('identical'));
+        $handlers = $this->prophesize(HandlersOptions::CLASS);
+        $handlers->getSubscribers()->willReturn([]);
+
+        $events = $this->prophesize(EventDispatcherOptions::CLASS);
+        $events->getSubscribers()->willReturn([]);
+
+        $visitors = $this->prophesize(VisitorsOptions::CLASS);
+        $visitors->getSerialization()->willReturn([]);
+        $visitors->getDeserialization()->willReturn([]);
+
+        $fileCache = $this->prophesize(FileCacheOptions::CLASS);
+//        $fileCache->getDir()->willReturn('');
+
+        $metadata = $this->prophesize(MetadataOptions::CLASS);
+        $metadata->getFileCache()->willReturn($fileCache->reveal());
+        $metadata->getDirectories()->willReturn([]);
+
+        $serializerOptions = $this->prophesize(JMSSerializerOptions::CLASS);
+        $serializerOptions->getDebug()->willReturn(null);
+        $serializerOptions->getHandlers()->willReturn($handlers->reveal());
+        $serializerOptions->getEventDispatcher()->willReturn($events->reveal());
+        $serializerOptions->getMetadata()->willReturn($metadata->reveal());
+        $serializerOptions->getVisitors()->willReturn($visitors->reveal());
+
+        $namingStrategy = $this->prophesize(PropertyNamingStrategyInterface::CLASS);
 
         $services = $this->getServices();
-        $services->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo(JMSSerializerOptions::CLASS))
-            ->will($this->returnValue($jmsSerializerOptions));
+        $services->get(JMSSerializerOptions::CLASS)->willReturn($serializerOptions->reveal());
+        $services->get('jms_serializer.naming_strategy')->willReturn($namingStrategy->reveal());
 
-        /** @var ServiceLocatorInterface $services */
+        $serializer = $this->getFactory()->__invoke($services->reveal(), Serializer::CLASS);
 
-        $factory = new SerializerFactory();
-        $visitor = $factory($services, Serializer::CLASS);
+        $this->assertInstanceOf(Serializer::CLASS, $serializer);
+    }
 
-        $this->assertInstanceOf(Serializer::CLASS, $visitor);
+    protected function createFactory(): FactoryInterface
+    {
+        return new SerializerFactory();
     }
 }

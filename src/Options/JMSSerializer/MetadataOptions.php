@@ -9,7 +9,7 @@ class MetadataOptions extends AbstractOptions
     /**
      * @var array|FileCacheOptions
      */
-    private $fileCache;
+    private $fileCache = [];
 
     /**
      * @var MetadataDirectoryOptions[]

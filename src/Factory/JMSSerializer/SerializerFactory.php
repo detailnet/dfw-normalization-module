@@ -10,6 +10,7 @@ use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
+use JMS\Serializer\Naming\PropertyNamingStrategyInterface;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\VisitorInterface;
@@ -33,6 +34,7 @@ class SerializerFactory implements
         $serializer = SerializerBuilder::create();
         $serializer->setDebug((bool) $serializerOptions->getDebug());
 
+        // When configuring our own handlers, the default handlers of JMS won't be added
         $serializer->configureHandlers(
             function (HandlerRegistry $handlers) use ($serializerOptions, $container) {
                 foreach ($serializerOptions->getHandlers()->getSubscribers() as $subscriberClass) {
@@ -44,6 +46,7 @@ class SerializerFactory implements
             }
         );
 
+        // When configuring our own listeners, the default listeners of JMS won't be added
         $serializer->configureListeners(
             function (EventDispatcher $events) use ($serializerOptions, $container) {
                 foreach ($serializerOptions->getEventDispatcher()->getSubscribers() as $subscriberClass) {
@@ -55,11 +58,17 @@ class SerializerFactory implements
             }
         );
 
+        // Need to set naming strategy before adding default visitors
+        /** @var PropertyNamingStrategyInterface $namingStrategy */
+        $namingStrategy = $container->get('jms_serializer.naming_strategy');
+
+        $serializer->setPropertyNamingStrategy($namingStrategy);
+
         // Add default visitors (JSON, XML)...
         $serializer->addDefaultSerializationVisitors();
         $serializer->addDefaultDeserializationVisitors();
 
-        // ..and our own visitors
+        // ..and our own visitors.
         foreach ($serializerOptions->getVisitors()->getSerialization() as $format => $visitorName) {
             /** @var VisitorInterface $visitor */
             $visitor = $container->get($visitorName);

@@ -3,13 +3,16 @@
 namespace DetailTest\Normalization\Factory\Options;
 
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 use Detail\Normalization\Factory\Options\ModuleOptionsFactory;
 use Detail\Normalization\Options\ModuleOptions;
 
 use DetailTest\Normalization\Factory\FactoryTestCase;
 
+/**
+ * @method ModuleOptionsFactory getFactory()
+ */
 class ModuleOptionsFactoryTest extends FactoryTestCase
 {
     public function testRaisesExceptionIfMissingConfigurationOptions(): void
@@ -26,18 +29,17 @@ class ModuleOptionsFactoryTest extends FactoryTestCase
         $this->assertInstanceOf(ModuleOptions::CLASS, $options);
     }
 
+    protected function createFactory(): FactoryInterface
+    {
+        return new ModuleOptionsFactory();
+    }
+
     private function createOptions(array $config): ModuleOptions
     {
         $services = $this->getServices();
-        $services->expects($this->atLeastOnce())
-            ->method('get')
-            ->with($this->equalTo('Config'))
-            ->will($this->returnValue($config));
+        $services->get('Config')->willReturn($config);
 
-        /** @var ServiceLocatorInterface $services */
-
-        $factory = new ModuleOptionsFactory();
-        $options = $factory($services, ModuleOptions::CLASS);
+        $options = $this->getFactory()->__invoke($services->reveal(), ModuleOptions::CLASS);
 
         return $options;
     }

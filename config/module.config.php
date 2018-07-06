@@ -30,10 +30,6 @@ return [
                 Normalization\JMSSerializer\Handler\DateImmutableHandler::CLASS,
             Normalization\JMSSerializer\Handler\UuidHandler::CLASS =>
                 Normalization\JMSSerializer\Handler\UuidHandler::CLASS,
-
-            // Add our own version of the default subscriber to support HalCollection types
-            'jms_serializer.doctrine_proxy_subscriber' =>
-                Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS,
         ],
         'factories' => [
             // JMSSerializer
@@ -83,11 +79,14 @@ return [
         ],
         'handlers' => [
             'subscribers' => [
+                /** @todo Add handlers for PhpCollection and StdClass */
                 Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS,
                 Normalization\JMSSerializer\Handler\DateHandler::CLASS,
-                Normalization\JMSSerializer\Handler\DateImmutableHandler::CLASS,
                 Normalization\JMSSerializer\Handler\UuidHandler::CLASS,
             ],
+        ],
+        'eventdispatcher' => [
+            'subscribers' => []
         ],
     ],
     'detail_normalization' => [

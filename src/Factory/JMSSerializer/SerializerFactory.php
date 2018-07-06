@@ -55,6 +55,11 @@ class SerializerFactory implements
             }
         );
 
+        // Add default visitors (JSON, XML)...
+        $serializer->addDefaultSerializationVisitors();
+        $serializer->addDefaultDeserializationVisitors();
+
+        // ..and our own visitors
         foreach ($serializerOptions->getVisitors()->getSerialization() as $format => $visitorName) {
             /** @var VisitorInterface $visitor */
             $visitor = $container->get($visitorName);

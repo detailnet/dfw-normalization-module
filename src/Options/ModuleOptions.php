@@ -7,22 +7,16 @@ use Zend\Stdlib\AbstractOptions;
 class ModuleOptions extends AbstractOptions
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $normalizer;
 
-    /**
-     * @return string
-     */
-    public function getNormalizer()
+    public function getNormalizer(): ?string
     {
         return $this->normalizer;
     }
 
-    /**
-     * @param string $normalizer
-     */
-    public function setNormalizer($normalizer)
+    public function setNormalizer(?string $normalizer)
     {
         $this->normalizer = $normalizer;
     }

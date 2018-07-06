@@ -2,7 +2,6 @@
 
 namespace DetailTest\Normalization\Factory;
 
-//use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 use Prophecy\Prophecy\ObjectProphecy;
@@ -10,7 +9,6 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Interop\Container\ContainerInterface;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
-//use Zend\ServiceManager\ServiceLocatorInterface;
 
 abstract class FactoryTestCase extends TestCase
 {
@@ -27,7 +25,6 @@ abstract class FactoryTestCase extends TestCase
     protected function setUp()
     {
         $this->services = $this->prophesize(ContainerInterface::CLASS);
-//        $this->services = $this->getMockBuilder(ServiceLocatorInterface::CLASS)->getMock();
         $this->factory = $this->createFactory();
     }
 

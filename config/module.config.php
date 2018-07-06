@@ -26,8 +26,6 @@ return [
                 Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS,
             Normalization\JMSSerializer\Handler\DateHandler::CLASS =>
                 Normalization\JMSSerializer\Handler\DateHandler::CLASS,
-            Normalization\JMSSerializer\Handler\DateImmutableHandler::CLASS =>
-                Normalization\JMSSerializer\Handler\DateImmutableHandler::CLASS,
             Normalization\JMSSerializer\Handler\UuidHandler::CLASS =>
                 Normalization\JMSSerializer\Handler\UuidHandler::CLASS,
         ],

@@ -6,6 +6,8 @@ use Interop\Container\ContainerInterface;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 
+use JMS\Serializer\EventDispatcher\EventDispatcher;
+use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\Serializer;
@@ -38,6 +40,17 @@ class SerializerFactory implements
                     $subscriber = $container->get($subscriberClass);
 
                     $handlers->registerSubscribingHandler($subscriber);
+                }
+            }
+        );
+
+        $serializer->configureListeners(
+            function (EventDispatcher $events) use ($serializerOptions, $container) {
+                foreach ($serializerOptions->getEventDispatcher()->getSubscribers() as $subscriberClass) {
+                    /** @var EventSubscriberInterface $subscriber */
+                    $subscriber = $container->get($subscriberClass);
+
+                    $events->addSubscriber($subscriber);
                 }
             }
         );

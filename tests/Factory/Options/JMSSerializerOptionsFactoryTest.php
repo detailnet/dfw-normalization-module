@@ -5,15 +5,15 @@ namespace DetailTest\Normalization\Factory\Options;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-use Detail\Normalization\Factory\Options\ModuleOptionsFactory;
-use Detail\Normalization\Options\ModuleOptions;
+use Detail\Normalization\Factory\Options\JMSSerializerOptionsFactory;
+use Detail\Normalization\Options\JMSSerializerOptions;
 
 use DetailTest\Normalization\Factory\FactoryTestCase;
 
 /**
- * @method ModuleOptionsFactory getFactory()
+ * @method JMSSerializerOptionsFactory getFactory()
  */
-class ModuleOptionsFactoryTest extends FactoryTestCase
+class JMSSerializerOptionsFactoryTest extends FactoryTestCase
 {
     public function testRaisesExceptionIfMissingConfigurationOptions(): void
     {
@@ -24,22 +24,22 @@ class ModuleOptionsFactoryTest extends FactoryTestCase
 
     public function testCreatesOptions(): void
     {
-        $options = $this->createOptions(['detail_normalization' => []]);
+        $options = $this->createOptions(['jms_serializer' => []]);
 
-        $this->assertInstanceOf(ModuleOptions::CLASS, $options);
+        $this->assertInstanceOf(JMSSerializerOptions::CLASS, $options);
     }
 
     protected function createFactory(): FactoryInterface
     {
-        return new ModuleOptionsFactory();
+        return new JMSSerializerOptionsFactory();
     }
 
-    private function createOptions(array $config): ModuleOptions
+    private function createOptions(array $config): JMSSerializerOptions
     {
         $services = $this->getServices();
         $services->get('Config')->willReturn($config);
 
-        $options = $this->getFactory()->__invoke($services->reveal(), ModuleOptions::CLASS);
+        $options = $this->getFactory()->__invoke($services->reveal(), JMSSerializerOptions::CLASS);
 
         return $options;
     }

@@ -2,7 +2,7 @@
 
 namespace DetailTest\Normalization\Factory\Normalizer;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 use JMS\Serializer\Serializer as JMSSerializer;
 
@@ -11,6 +11,9 @@ use Detail\Normalization\Normalizer\JMSSerializerBasedNormalizer;
 
 use DetailTest\Normalization\Factory\FactoryTestCase;
 
+/**
+ * @method JMSSerializerBasedNormalizerFactory getFactory()
+ */
 class JmsSerializedBasedNormalizerFactoryTest extends FactoryTestCase
 {
     public function testCreatesNormalizer(): void
@@ -20,16 +23,15 @@ class JmsSerializedBasedNormalizerFactoryTest extends FactoryTestCase
             ->getMock();
 
         $services = $this->getServices();
-        $services->expects($this->atLeastOnce())
-            ->method('get')
-            ->with($this->equalTo('jms_serializer.serializer'))
-            ->will($this->returnValue($jmsSerializer));
+        $services->get('jms_serializer.serializer')->willReturn($jmsSerializer);
 
-        /** @var ServiceLocatorInterface $services */
-
-        $factory = new JMSSerializerBasedNormalizerFactory();
-        $normalizer = $factory($services, JMSSerializerBasedNormalizer::CLASS);
+        $normalizer = $this->getFactory()->__invoke($services->reveal(), JMSSerializerBasedNormalizer::CLASS);
 
         $this->assertInstanceOf(JMSSerializerBasedNormalizer::CLASS, $normalizer);
+    }
+
+    protected function createFactory(): FactoryInterface
+    {
+        return new JMSSerializerBasedNormalizerFactory();
     }
 }

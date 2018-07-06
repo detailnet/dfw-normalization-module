@@ -2,7 +2,7 @@
 
 namespace DetailTest\Normalization\Factory\JMSSerializer;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 use JMS\Serializer\Naming\PropertyNamingStrategyInterface;
 
@@ -18,16 +18,15 @@ class PhpDeserializationVisitorFactoryTest extends FactoryTestCase
         $namingStrategy = $this->getMockBuilder(PropertyNamingStrategyInterface::CLASS)->getMock();
 
         $services = $this->getServices();
-        $services->expects($this->atLeastOnce())
-            ->method('get')
-            ->with($this->equalTo('jms_serializer.naming_strategy'))
-            ->will($this->returnValue($namingStrategy));
+        $services->get('jms_serializer.naming_strategy')->willReturn($namingStrategy);
 
-        /** @var ServiceLocatorInterface $services */
-
-        $factory = new PhpDeserializationVisitorFactory();
-        $visitor = $factory($services, PhpDeserializationVisitor::CLASS);
+        $visitor = $this->getFactory()->__invoke($services->reveal(), PhpDeserializationVisitor::CLASS);
 
         $this->assertInstanceOf(PhpDeserializationVisitor::CLASS, $visitor);
+    }
+
+    protected function createFactory(): FactoryInterface
+    {
+        return new PhpDeserializationVisitorFactory();
     }
 }

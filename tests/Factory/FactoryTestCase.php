@@ -2,25 +2,41 @@
 
 namespace DetailTest\Normalization\Factory;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Prophecy\Prophecy\ObjectProphecy;
+
+use Interop\Container\ContainerInterface;
+
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 abstract class FactoryTestCase extends TestCase
 {
     /**
-     * @var MockObject
+     * @var ObjectProphecy
      */
     private $services;
 
+    /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
     protected function setUp()
     {
-        $this->services = $this->getMockBuilder(ServiceLocatorInterface::CLASS)->getMock();
+        $this->services = $this->prophesize(ContainerInterface::CLASS);
+        $this->factory = $this->createFactory();
     }
 
-    protected function getServices(): MockObject
+    protected function getServices(): ObjectProphecy
     {
         return $this->services;
     }
+
+    protected function getFactory(): FactoryInterface
+    {
+        return $this->factory;
+    }
+
+    abstract protected function createFactory(): FactoryInterface;
 }

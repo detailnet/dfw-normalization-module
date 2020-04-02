@@ -23,6 +23,8 @@ class DateHandlerFactory implements
 
         $timezone = $serializerOptions->getTimezone();
 
+        // When upgrading to a new version of JMSSerializer, check if this timezone handling is still required.
+        // See https://github.com/schmittjoh/serializer/pull/835
         if ($timezone === null) {
             $timezone = date_default_timezone_get();
         }

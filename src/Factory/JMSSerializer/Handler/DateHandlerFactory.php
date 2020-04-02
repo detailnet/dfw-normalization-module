@@ -7,6 +7,7 @@ use Detail\Normalization\JMSSerializer\Handler\DateHandler;
 use Detail\Normalization\Options\JMSSerializerOptions;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
+use function date_default_timezone_get;
 
 class DateHandlerFactory implements
     FactoryInterface

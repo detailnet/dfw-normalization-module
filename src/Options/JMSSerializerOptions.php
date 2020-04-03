@@ -36,6 +36,9 @@ class JMSSerializerOptions extends AbstractOptions
      */
     private $eventDispatcher = [];
 
+    /** @var string|null */
+    private $timezone;
+
     public function getDebug(): ?bool
     {
         return $this->debug;
@@ -110,5 +113,15 @@ class JMSSerializerOptions extends AbstractOptions
     public function setEventDispatcher(array $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function getTimezone(): ?string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(?string $timezone): void
+    {
+        $this->timezone = $timezone;
     }
 }

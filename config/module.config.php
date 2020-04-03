@@ -24,8 +24,6 @@ return [
                 Normalization\JMSSerializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::CLASS,
             Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS =>
                 Normalization\JMSSerializer\Handler\ArrayCollectionHandler::CLASS,
-            Normalization\JMSSerializer\Handler\DateHandler::CLASS =>
-                Normalization\JMSSerializer\Handler\DateHandler::CLASS,
             Normalization\JMSSerializer\Handler\UuidHandler::CLASS =>
                 Normalization\JMSSerializer\Handler\UuidHandler::CLASS,
         ],
@@ -43,6 +41,8 @@ return [
 //                Factory\JMSSerializer\XmlDeserializationVisitorFactory::CLASS,
             'jms_serializer.naming_strategy' => Factory\JMSSerializer\NamingStrategyFactory::CLASS,
             // Normalizer
+            Normalization\JMSSerializer\Handler\DateHandler::CLASS =>
+                Factory\JMSSerializer\Handler\DateHandlerFactory::CLASS,
             Normalization\JMSSerializer\PhpSerializationVisitor::CLASS =>
                 Factory\JMSSerializer\PhpSerializationVisitorFactory::CLASS,
             Normalization\JMSSerializer\PhpDeserializationVisitor::CLASS =>
@@ -86,6 +86,7 @@ return [
         'eventdispatcher' => [
             'subscribers' => []
         ],
+        'timezone' => null,
     ],
     'detail_normalization' => [
         'normalizer' => Normalization\Normalizer\JMSSerializerBasedNormalizer::CLASS,
